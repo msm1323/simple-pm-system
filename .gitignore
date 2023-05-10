@@ -1,0 +1,8 @@
+#Folders
+target
+.idea
+
+#Files
+*.iml
+*.log
+*.jar
