@@ -8,12 +8,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>simple-pm-system-dao</artifactId>
-<!--    <packaging>jar</packaging>-->
 
     <dependencies>
         <dependency>
             <groupId>ru.msm.pm</groupId>
-            <artifactId>simple-pm-system-dto</artifactId>
+            <artifactId>simple-pm-system-model</artifactId>
             <version>${revision}${changelist}</version>
         </dependency>
     </dependencies>
