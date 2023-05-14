@@ -46,7 +46,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        ru.msm.pm.App
+                                        ru.msm.pm.app.App
                                     </mainClass>
                                 </manifest>
                             </archive>

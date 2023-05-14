@@ -1,4 +1,4 @@
-package ru.msm.pm;
+package ru.msm.pm.app;
 
 import java.util.ArrayList;
 
