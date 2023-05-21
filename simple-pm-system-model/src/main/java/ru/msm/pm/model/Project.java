@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Project extends BaseProject implements Serializable {
@@ -22,6 +21,15 @@ public class Project extends BaseProject implements Serializable {
     //необязательные:
     private List<Task> tasks;
     private Map<Employee, ProjectRole> team;
+
+    @Override
+    public String toString() {
+        return "Project{" + "codeName='" + codeName + '\'' +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                '}';
+    }
 
     public Project(String name, String codeName) {
         super(name, codeName);

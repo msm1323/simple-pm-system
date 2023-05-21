@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Task extends BaseTask implements Serializable {
@@ -22,6 +21,22 @@ public class Task extends BaseTask implements Serializable {
 
     //необязательные:
     private Employee executor;
+
+    @Override
+    public String toString() {
+        return "Task{" + "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", author.id=" + author.getId() +
+                ", project.codeName='" + project.getCodeName() + '\'' +
+                ", laborCosts=" + laborCosts +
+                ", deadline=" + deadline +
+                ", dateCreated=" + dateCreated +
+                ", dateUpdated=" + dateUpdated +
+                ", description='" + description + '\'' +
+                ", executor.id=" + executor.getId() +
+                '}';
+    }
 
     public Task(String name, Project project, Employee author, Integer laborCosts, Date deadline) {
         super(name);
