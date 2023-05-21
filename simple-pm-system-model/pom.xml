@@ -12,7 +12,15 @@
     <artifactId>simple-pm-system-model</artifactId>
 
     <dependencies>
-
+        <dependency>
+            <groupId>ru.msm.pm</groupId>
+            <artifactId>simple-pm-system-common</artifactId>
+            <version>${revision}${changelist}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
