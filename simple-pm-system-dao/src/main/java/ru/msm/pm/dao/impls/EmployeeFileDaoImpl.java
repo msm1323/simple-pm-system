@@ -4,16 +4,15 @@ import ru.msm.pm.dao.MemberDao;
 import ru.msm.pm.model.Employee;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
-
-public class EmployeeFileDaoImpl implements MemberDao<Employee> {
+//todo переделать: задавать пути к файлам в конструкторе; атомарность nextId()
+public class EmployeeFileDaoImpl implements MemberDao<Employee, Long> {
 
     private final String commonDaoDataPath = "simple-pm-system-dao/src/main/java/ru/msm/pm/dao/data/";
     private final String employeeDataFilePath = commonDaoDataPath + "employee";
     private final String idPropsFilePath = commonDaoDataPath + "id.properties";
     private final String idPropName = "id.employee.cur.value";
-    private Map<BigDecimal, Employee> employees;
+    private Map<Long, Employee> employees;
 
     public EmployeeFileDaoImpl() {
         employees = new HashMap<>();
@@ -34,12 +33,12 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee> {
     }
 
     @Override
-    public Employee getById(BigDecimal id) throws Exception {
+    public Employee getById(Long id) throws Exception {
         return getEmployees().get(id);
     }
 
     @Override
-    public Employee deleteById(BigDecimal id) throws Exception {
+    public Employee deleteById(Long id) throws Exception {
         Employee removed = getEmployees().remove(id);
         writeData();
         return removed;
@@ -50,7 +49,7 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee> {
         return new ArrayList<>(getEmployees().values());
     }
 
-    private Map<BigDecimal, Employee> getEmployees() throws Exception {
+    private Map<Long, Employee> getEmployees() throws Exception {
         if (employees.size() == 0) {
             readData();
         }
@@ -77,7 +76,7 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee> {
             throw new Exception();
         }
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(employeeDataFilePath))) {
-            employees = (HashMap<BigDecimal, Employee>) in.readObject();
+            employees = (HashMap<Long, Employee>) in.readObject();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (ClassCastException | ClassNotFoundException e) {
@@ -89,9 +88,9 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee> {
         }
     }
 
-    private BigDecimal nextId() throws Exception {
+    private Long nextId() throws Exception {
         Properties fileDaoProps = new Properties();
-        BigDecimal id;
+        long id;
         try (FileInputStream fis = new FileInputStream(idPropsFilePath)) {
             fileDaoProps.load(fis);
             String property = fileDaoProps.getProperty(idPropName);
@@ -101,8 +100,8 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee> {
             if (property.equals("")) {
                 throw new Exception("There is no value for property with name \"" + idPropName + "\".");
             }
-            id = new BigDecimal(property);
-            fileDaoProps.setProperty(idPropName, String.valueOf(id.add(new BigDecimal("1"))));
+            id = Long.parseLong(property);
+            fileDaoProps.setProperty(idPropName, String.valueOf(id + 1));
             try (FileOutputStream fos = new FileOutputStream(idPropsFilePath)) {
                 fileDaoProps.store(fos, "set next id");
             }

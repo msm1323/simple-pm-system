@@ -1,19 +1,18 @@
 package ru.msm.pm.dao;
 
-import ru.msm.pm.model.abstractEntities.Member;
+import ru.msm.pm.model.abstract_entities.Member;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-public interface MemberDao<T extends Member> {
+public interface MemberDao<T extends Member, K> {
 
     T create(T member) throws Exception;
 
     T update(T member) throws Exception;
 
-    T getById(BigDecimal id) throws Exception;
+    T getById(K id) throws Exception;
 
-    T deleteById(BigDecimal id) throws Exception;
+    T deleteById(K id) throws Exception;
 
     List<T> getAll() throws Exception;
 
