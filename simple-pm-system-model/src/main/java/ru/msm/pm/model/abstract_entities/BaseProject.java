@@ -1,8 +1,6 @@
-package ru.msm.pm.model.abstractEntities;
+package ru.msm.pm.model.abstract_entities;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -11,6 +9,7 @@ import java.io.Serializable;
 public abstract class BaseProject implements Serializable {
 
     //обязательные:
+    protected Long id;  //сур-й PK
     protected String codeName;    //Является обязательным и уникальным среди всех проектов.
     protected String name;
 

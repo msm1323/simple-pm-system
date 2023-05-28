@@ -2,7 +2,7 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import ru.msm.pm.enums.EmployeeStatus;
-import ru.msm.pm.model.abstractEntities.Member;
+import ru.msm.pm.model.abstract_entities.Member;
 
 import java.io.Serializable;
 
@@ -10,10 +10,12 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Employee extends Member implements Serializable {
 
     //обязательные:
-    private EmployeeStatus status;
+    private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
     //необязательные:
     private String patronymic;
@@ -23,7 +25,6 @@ public class Employee extends Member implements Serializable {
 
     public Employee(String name, String surname) {
         super(name, surname);
-        status = EmployeeStatus.ACTIVE;
     }
 
 }

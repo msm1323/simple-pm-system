@@ -1,11 +1,10 @@
-package ru.msm.pm.model.abstractEntities;
+package ru.msm.pm.model.abstract_entities;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -13,18 +12,16 @@ import java.util.Date;
 public abstract class BaseTask implements Serializable {
 
     //обязательные:
-    protected BigDecimal id;  //сур-й PK
+    protected Long id;  //сур-й PK
     protected String name;
-    protected Date dateCreated;
-    protected Date dateUpdated;   //дата последнего редактирования задачи (но не изменение статуса задачи).
+    protected Date dateCreated  = new Date();
+    protected Date dateUpdated = dateCreated;//дата последнего редактирования задачи (но не изменение статуса задачи)
 
     //необязательные:
     protected String description;
 
     protected BaseTask(String name) {
         this.name = name;
-        this.dateCreated = new Date();
-        this.dateUpdated = dateCreated;
     }
 
 

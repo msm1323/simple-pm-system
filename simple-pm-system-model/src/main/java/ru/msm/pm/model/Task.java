@@ -2,7 +2,7 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import ru.msm.pm.enums.TaskStatus;
-import ru.msm.pm.model.abstractEntities.BaseTask;
+import ru.msm.pm.model.abstract_entities.BaseTask;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +14,7 @@ public class Task extends BaseTask implements Serializable {
 
     //обязательные:
     private Employee author;
-    private TaskStatus status;
+    private TaskStatus status = TaskStatus.NEW;
     private Project project;
     private Integer laborCosts;
     private Date deadline;
@@ -44,7 +44,6 @@ public class Task extends BaseTask implements Serializable {
         this.author = author;
         this.laborCosts = laborCosts;
         this.deadline = deadline;
-        status = TaskStatus.NEW;
     }
 
 }

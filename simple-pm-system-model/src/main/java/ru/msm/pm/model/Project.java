@@ -2,13 +2,11 @@ package ru.msm.pm.model;
 
 import lombok.*;
 
-import ru.msm.pm.enums.ProjectRole;
 import ru.msm.pm.enums.ProjectStatus;
-import ru.msm.pm.model.abstractEntities.BaseProject;
+import ru.msm.pm.model.abstract_entities.BaseProject;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,11 +14,11 @@ import java.util.Map;
 public class Project extends BaseProject implements Serializable {
 
     //обязательные:
-    private ProjectStatus status;
+    private ProjectStatus status = ProjectStatus.DRAFT;
 
     //необязательные:
     private List<Task> tasks;
-    private Map<Employee, ProjectRole> team;
+    private List<Participant> team;
 
     @Override
     public String toString() {
@@ -33,7 +31,6 @@ public class Project extends BaseProject implements Serializable {
 
     public Project(String name, String codeName) {
         super(name, codeName);
-        status = ProjectStatus.DRAFT;
     }
 
 }
