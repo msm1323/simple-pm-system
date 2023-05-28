@@ -1,14 +1,10 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Data
 public class DeleteEmployeeDto {
 
-    private BigDecimal id;
+    private Long id;        //обязательное для выполнения запроса поле
 
 }

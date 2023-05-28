@@ -1,12 +1,12 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
+@Builder
 public class CreateEmployeeDto {
-
+    //обязательные для выполнения запроса поля:
     private String name;
     private String surname;
 

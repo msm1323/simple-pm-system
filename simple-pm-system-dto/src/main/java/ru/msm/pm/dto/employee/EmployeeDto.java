@@ -1,16 +1,14 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 import ru.msm.pm.enums.EmployeeStatus;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Data
+@Builder
 public class EmployeeDto {
 
-    private BigDecimal id;
+    private Long id;
     private String displayName; // name surname [patronymic]
     private EmployeeStatus status;
     private String details; //необязательные поля (кроме patronymic)

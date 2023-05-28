@@ -1,12 +1,10 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class GetEmployeeByAccountDto {
 
-    private String account;
+    private String account;        //обязательное для выполнения запроса поле
 
 }

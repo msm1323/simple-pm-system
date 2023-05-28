@@ -1,12 +1,10 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class UpdateProjectStatusDto {
 
-    private String codeName;
+    private Long id;        //обязательное для выполнения запроса поле
 
 }

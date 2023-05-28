@@ -1,12 +1,10 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class GetProjectTeamDto {
 
-    private String projectCodeName;
+    private Long projectId;        //обязательное для выполнения запроса поле
 
 }

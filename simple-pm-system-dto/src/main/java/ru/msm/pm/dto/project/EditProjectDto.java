@@ -1,15 +1,15 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-import java.util.Map;
-
-@Getter
-@Setter
+@Data
+@Builder
 public class EditProjectDto {
 
-    private String codeName;
-    private Map<String, Object> fields;
+    private Long id;            //обязательное для выполнения запроса поле
+    private String codeName;    //Является обязательным и уникальным среди всех проектов.
+    private String name;
+    protected String description;
 
 }

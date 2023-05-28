@@ -1,12 +1,12 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
+@Builder
 public class CreateProjectDto {
-
+    //обязательные для выполнения запроса поляЖ
     private String name;
     private String codeName;
 

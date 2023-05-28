@@ -1,17 +1,15 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Getter;
-import lombok.Setter;
-import ru.msm.pm.dto.employee.EmployeeDto;
-import ru.msm.pm.enums.ProjectRole;
+import lombok.Builder;
+import lombok.Data;
 
-import java.util.Map;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
+@Builder
 public class ProjectTeamDto {
 
-    private String projectCodeName;
-    private Map<EmployeeDto, ProjectRole> team;
+    private Long projectId;
+    private List<ParticipantDto> team;
 
 }

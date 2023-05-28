@@ -1,9 +1,10 @@
 package ru.msm.pm.dto.task;
 
-import ru.msm.pm.dto.employee.EmployeeDto;
+import lombok.Data;
 
 import java.util.List;
 
+@Data
 public class TasksDto {
 
     List<TaskDto> tasks;

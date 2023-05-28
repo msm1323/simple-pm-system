@@ -1,17 +1,16 @@
 package ru.msm.pm.dto.task;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
+@Builder
 public class CreateTaskDto {
-
-    //    private MemberDto author; // todo можно вытащить авторизовавшегося уже в сервисе?
+    //обязательные для выполнения запроса поля:
     private String name;
-    private String projectCodeName;
+    private Long projectId;
     private Integer laborCosts;
     private Date deadline;
 

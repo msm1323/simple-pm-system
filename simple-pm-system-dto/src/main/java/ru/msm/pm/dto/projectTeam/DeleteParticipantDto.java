@@ -1,15 +1,10 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Data
 public class DeleteParticipantDto {
 
-    private BigDecimal id;
-    private String projectCodeName;
+    private Long participantId;        //обязательное для выполнения запроса поле
 
 }

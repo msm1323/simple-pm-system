@@ -1,16 +1,21 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 
-import java.math.BigDecimal;
-import java.util.Map;
-
-@Getter
-@Setter
+@Data
+@Builder
 public class EditEmployeeDto {
 
-    private BigDecimal id;
-    private Map<String, Object> fields;
+    //обязательные поля Employee:
+    private Long id;        //обязательное для выполнения запроса поле
+    private String name;
+    private String surname;
+
+    //необязательные:
+    private String patronymic;
+    private String position;
+    private String account;
+    private String email;
 
 }

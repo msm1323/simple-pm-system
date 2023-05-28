@@ -1,22 +1,20 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Getter;
-import lombok.Setter;
-import ru.msm.pm.enums.ProjectRole;
+import lombok.Builder;
+import lombok.Data;
 import ru.msm.pm.enums.ProjectStatus;
 
-import java.util.List;
-import java.util.Map;
-
-@Getter
-@Setter
+@Data
+@Builder
 public class ProjectDto {
 
+    //обязательные:
+    private Long id;
     private String name;
-    private String codeName;
+    private String codeName;    //Является обязательным и уникальным среди всех проектов
     private ProjectStatus status;
+
+    //необязательные:
     private String description;
-    private List<Long> tasks;   // id
-    private Map<Long, ProjectRole> team;    // (id, role)
 
 }

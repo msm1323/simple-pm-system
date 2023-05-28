@@ -1,16 +1,14 @@
 package ru.msm.pm.dto.task;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 import ru.msm.pm.enums.TaskStatus;
 
-import java.math.BigDecimal;
-
-@Getter
-@Setter
+@Data
+@Builder
 public class TaskDto {
 
-    private BigDecimal id;
+    private Long id;
     private String name;
     private Long authorId;
     private String projectCodeName;

@@ -1,12 +1,10 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class FindEmployeeDto {
 
-    private String value;
+    private String value;        //обязательное для выполнения запроса поле
 
 }
