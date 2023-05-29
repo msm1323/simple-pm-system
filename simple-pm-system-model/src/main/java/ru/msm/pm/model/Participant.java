@@ -13,9 +13,11 @@ public class Participant {
     private Long id;
     private Employee employee;
     private ProjectRole role;
+    private Project project;
 
-    public Participant(Employee employee, ProjectRole role) {
+    public Participant(Employee employee, Project project, ProjectRole role) {
         this.employee = employee;
+        this.project = project;
         this.role = role;
     }
 }
