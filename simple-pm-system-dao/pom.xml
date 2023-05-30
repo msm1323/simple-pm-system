@@ -15,6 +15,15 @@
             <artifactId>simple-pm-system-model</artifactId>
             <version>${revision}${changelist}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
