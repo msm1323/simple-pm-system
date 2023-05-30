@@ -1,4 +1,4 @@
-package ru.msm.pm.dao.impls;
+package ru.msm.pm.dao.impls.jdbc_dao;
 
 import lombok.Data;
 import ru.msm.pm.enums.EmployeeStatus;

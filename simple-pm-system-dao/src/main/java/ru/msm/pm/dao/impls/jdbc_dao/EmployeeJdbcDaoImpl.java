@@ -1,10 +1,11 @@
-package ru.msm.pm.dao.impls;
+package ru.msm.pm.dao.impls.jdbc_dao;
 
 import ru.msm.pm.dao.MemberDao;
 import ru.msm.pm.enums.EmployeeStatus;
 import ru.msm.pm.model.Employee;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,15 +14,22 @@ import java.util.Map;
 
 public class EmployeeJdbcDaoImpl implements MemberDao<Employee, Long> {
 
-    private DataSource dataSource;
+    private static EmployeeJdbcDaoImpl employeeJdbcDao;
+    private final DbUtil dbUtil = new DbUtil();
+    private final DataSource dataSource = dbUtil.getDataSource();
 
-    //"localhost", "postgres", "password", "pm-system", 5432
-    EmployeeJdbcDaoImpl(String serverName, String user, String pass, String dbName, int port){
-        dataSource = DbUtil.buildDataSource(serverName, user, pass, dbName, port);
+    private EmployeeJdbcDaoImpl() throws IOException {
+    }
+
+    public static EmployeeJdbcDaoImpl getInstance() throws IOException {
+        if (employeeJdbcDao == null) {
+            employeeJdbcDao = new EmployeeJdbcDaoImpl();
+        }
+        return employeeJdbcDao;
     }
 
     @Override
-    public Employee create(Employee employee) throws Exception {
+    public Employee create(Employee employee) throws SQLException {
         String insertQuery = "INSERT INTO employee (name, surname, status, patronymic, account, position, email)" +
                 " values (?, ?, ?, ?, ?, ?, ?)";
         try (Connection connection = dataSource.getConnection();
@@ -29,21 +37,20 @@ public class EmployeeJdbcDaoImpl implements MemberDao<Employee, Long> {
             fillPreparedStatement(preparedStatement, employee);
             int i = preparedStatement.executeUpdate();
             if (i == 0) {
-                throw new SQLException("Не удалось добавить сотрудника в таблицу employee!");
+                throw new SQLException("Failed to add employee into the table \"employee\"!");
             }
-            ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                long id = generatedKeys.getLong(1);
-                employee.setId(id);
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    long id = generatedKeys.getLong(1);
+                    employee.setId(id);
+                }
             }
-            generatedKeys.close();
         }
-
         return employee;
     }
 
     @Override
-    public Employee update(Employee employee) throws Exception {
+    public Employee update(Employee employee) throws SQLException {
         String updateQuery = "UPDATE employee set name=?, surname=?, status=?, patronymic=?, account=?, position=?, email=?" +
                 " WHERE id=?";
         try (Connection connection = dataSource.getConnection();
@@ -52,62 +59,64 @@ public class EmployeeJdbcDaoImpl implements MemberDao<Employee, Long> {
             preparedStatement.setLong(8, employee.getId());
             int i = preparedStatement.executeUpdate();
             if (i == 0) {
-                throw new SQLException("Не удалось изменить сотрудника в таблице employee!");
+                throw new SQLException("Failed to change employee in the table \"employee\"!");
             }
         }
         return employee;
     }
 
     @Override
-    public Employee getById(Long id) throws Exception {
+    public Employee getById(Long id) throws SQLException {
         Employee employee;
         String selectQuery = "SELECT * FROM employee WHERE id = " + id;
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery(selectQuery);
-            if (!rs.next()) {
-                throw new SQLException("Не удалось найти сотрудника с id=" + id + " в таблице employee!");
+            try (ResultSet rs = statement.executeQuery(selectQuery)) {
+                if (!rs.next()) {
+                    throw new SQLException("Failed to find employee with id=\" + id + \" in the table \"employee\"!");
+                }
+                employee = buildEmployeeByRs(rs);
             }
-            employee = buildEmployeeByRs(rs);
         }
         return employee;
     }
 
     @Override
-    public Employee deleteById(Long id) throws Exception {
+    public Employee deleteById(Long id) throws SQLException {
         Employee employee;
         String deleteQuery = "DELETE FROM employee WHERE id = " + id + " RETURNING *;";
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery(deleteQuery);
-            if (!rs.next()) {
-                throw new SQLException("Не удалось удалить сотрудника с id=" + id + " в таблице employee!");
+            try (ResultSet rs = statement.executeQuery(deleteQuery)) {
+                if (!rs.next()) {
+                    throw new SQLException("Failed to delete employee with id=" + id + " in the table \"employee\"!");
+                }
+                employee = buildEmployeeByRs(rs);
             }
-            employee = buildEmployeeByRs(rs);
-            rs.close();
         }
         return employee;
     }
 
     @Override
-    public List<Employee> getAll() throws Exception {
+    public List<Employee> getAll() throws SQLException {
         String selectQuery = "SELECT * FROM employee";
         List<Employee> employees = new LinkedList<>();
         try (Connection connection = dataSource.getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet rs = statement.executeQuery(selectQuery);
-            if (!rs.next()) {
-                throw new SQLException("Не удалось найти сотрудников в таблице employee!");
-            }
-            employees.add(buildEmployeeByRs(rs));
-            while (rs.next()) {
+            try (ResultSet rs = statement.executeQuery(selectQuery)) {
+                if (!rs.next()) {
+                    throw new SQLException("Failed to find employees в in the table \"employee\"!");
+                }
                 employees.add(buildEmployeeByRs(rs));
+                while (rs.next()) {
+                    employees.add(buildEmployeeByRs(rs));
+                }
             }
         }
         return employees;
     }
 
-    public List<Employee> search(EmployeeFilter filter) {
+    public List<Employee> search(EmployeeFilter filter) throws SQLException {
         String joinRole_roleCondition = "", joinPp = "";
         String ppCondition = "", statusCondition = "";
         Map<Integer, Object> paramMap = new HashMap<>();
@@ -136,13 +145,11 @@ public class EmployeeJdbcDaoImpl implements MemberDao<Employee, Long> {
             for (Map.Entry<Integer, Object> entry : paramMap.entrySet()) {
                 ps.setObject(entry.getKey(), entry.getValue());
             }
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                employees.add(buildEmployeeByRs(rs));
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    employees.add(buildEmployeeByRs(rs));
+                }
             }
-            rs.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return employees;   //todo выкидывать ли исключение, если запрос не вернул результатов?
     }
