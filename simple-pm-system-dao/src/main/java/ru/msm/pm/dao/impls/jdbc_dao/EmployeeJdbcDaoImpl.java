@@ -151,7 +151,7 @@ public class EmployeeJdbcDaoImpl implements MemberDao<Employee, Long> {
                 }
             }
         }
-        return employees;   //todo выкидывать ли исключение, если запрос не вернул результатов?
+        return employees;
     }
 
     private void fillPreparedStatement(PreparedStatement preparedStatement, Employee employee) throws SQLException {
