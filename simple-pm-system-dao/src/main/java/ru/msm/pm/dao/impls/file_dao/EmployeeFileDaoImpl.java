@@ -1,21 +1,32 @@
-package ru.msm.pm.dao.impls;
+package ru.msm.pm.dao.impls.file_dao;
 
 import ru.msm.pm.dao.MemberDao;
 import ru.msm.pm.model.Employee;
 
 import java.io.*;
 import java.util.*;
-//todo переделать: задавать пути к файлам в конструкторе; атомарность nextId()
+import java.util.concurrent.atomic.AtomicLong;
+
 public class EmployeeFileDaoImpl implements MemberDao<Employee, Long> {
 
+    private static EmployeeFileDaoImpl employeeFileDao;
+    private final AtomicLong idGenerator;
     private final String commonDaoDataPath = "simple-pm-system-dao/src/main/java/ru/msm/pm/dao/data/";
     private final String employeeDataFilePath = commonDaoDataPath + "employee";
     private final String idPropsFilePath = commonDaoDataPath + "id.properties";
     private final String idPropName = "id.employee.cur.value";
     private Map<Long, Employee> employees;
 
-    public EmployeeFileDaoImpl() {
+    private EmployeeFileDaoImpl() throws Exception {
         employees = new HashMap<>();
+        idGenerator = new AtomicLong(Long.parseLong(FileDaoUtils.getProperty(idPropsFilePath, idPropName)));
+    }
+
+    public static EmployeeFileDaoImpl getInstance() throws Exception {
+        if (employeeFileDao == null) {
+            employeeFileDao = new EmployeeFileDaoImpl();
+        }
+        return employeeFileDao;
     }
 
     @Override
@@ -89,29 +100,8 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee, Long> {
     }
 
     private Long nextId() throws Exception {
-        Properties fileDaoProps = new Properties();
-        long id;
-        try (FileInputStream fis = new FileInputStream(idPropsFilePath)) {
-            fileDaoProps.load(fis);
-            String property = fileDaoProps.getProperty(idPropName);
-            if (property == null) {
-                throw new Exception("There is no property with name \"" + idPropName + "\".");
-            }
-            if (property.equals("")) {
-                throw new Exception("There is no value for property with name \"" + idPropName + "\".");
-            }
-            id = Long.parseLong(property);
-            fileDaoProps.setProperty(idPropName, String.valueOf(id + 1));
-            try (FileOutputStream fos = new FileOutputStream(idPropsFilePath)) {
-                fileDaoProps.store(fos, "set next id");
-            }
-        } catch (FileNotFoundException e) {
-            System.err.println("Property file not found.");
-            throw e;
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-            throw e;
-        }
+        long id = idGenerator.incrementAndGet();
+        FileDaoUtils.setProperty(idPropsFilePath, idPropName, String.valueOf(id));
         return id;
     }
 
