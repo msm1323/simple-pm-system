@@ -1,6 +1,7 @@
 package ru.msm.pm.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ru.msm.pm.enums.TaskStatus;
 import ru.msm.pm.model.abstract_entities.BaseTask;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@SuperBuilder
 public class Task extends BaseTask implements Serializable {
 
     //обязательные:
@@ -24,16 +26,16 @@ public class Task extends BaseTask implements Serializable {
 
     @Override
     public String toString() {
-        return "Task{" + "id=" + id +
-                ", name='" + name + '\'' +
+        return "Task{" + "id=" + super.getId() +
+                ", name='" + super.getName() + '\'' +
                 ", status=" + status +
                 ", author.id=" + author.getId() +
                 ", project.codeName='" + project.getCodeName() + '\'' +
                 ", laborCosts=" + laborCosts +
                 ", deadline=" + deadline +
-                ", dateCreated=" + dateCreated +
-                ", dateUpdated=" + dateUpdated +
-                ", description='" + description + '\'' +
+                ", dateCreated=" + super.getDateCreated() +
+                ", dateUpdated=" + super.getDateUpdated() +
+                ", description='" + super.getDescription() + '\'' +
                 ", executor.id=" + executor.getId() +
                 '}';
     }

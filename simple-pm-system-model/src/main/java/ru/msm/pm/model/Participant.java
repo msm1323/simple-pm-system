@@ -1,12 +1,12 @@
 package ru.msm.pm.model;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.msm.pm.enums.ProjectRole;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Participant {
 
     //обязательные:

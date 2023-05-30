@@ -1,6 +1,7 @@
 package ru.msm.pm.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ru.msm.pm.enums.EmployeeStatus;
 import ru.msm.pm.model.abstract_entities.Member;
 
@@ -10,8 +11,7 @@ import java.io.Serializable;
 @ToString(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Builder
+@SuperBuilder
 public class Employee extends Member implements Serializable {
 
     //обязательные:
@@ -27,4 +27,8 @@ public class Employee extends Member implements Serializable {
         super(name, surname);
     }
 
+    @Override
+    public void setId(Long id) {
+        super.setId(id);
+    }
 }

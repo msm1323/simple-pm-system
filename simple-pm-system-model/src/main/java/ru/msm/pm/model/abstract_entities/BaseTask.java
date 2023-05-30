@@ -3,22 +3,24 @@ package ru.msm.pm.model.abstract_entities;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 public abstract class BaseTask implements Serializable {
 
     //обязательные:
-    protected Long id;  //сур-й PK
-    protected String name;
-    protected Date dateCreated  = new Date();
-    protected Date dateUpdated = dateCreated;//дата последнего редактирования задачи (но не изменение статуса задачи)
+    private Long id;  //сур-й PK
+    private String name;
+    private Date dateCreated  = new Date();
+    private Date dateUpdated = dateCreated;//дата последнего редактирования задачи (но не изменение статуса задачи)
 
     //необязательные:
-    protected String description;
+    private String description;
 
     protected BaseTask(String name) {
         this.name = name;

@@ -1,20 +1,22 @@
 package ru.msm.pm.model.abstract_entities;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SuperBuilder
 public abstract class BaseProject implements Serializable {
 
     //обязательные:
-    protected Long id;  //сур-й PK
-    protected String codeName;    //Является обязательным и уникальным среди всех проектов.
-    protected String name;
+    private Long id;  //сур-й PK
+    private String codeName;    //Является обязательным и уникальным среди всех проектов.
+    private String name;
 
     //необязательные:
-    protected String description;
+    private String description;
 
     protected BaseProject(String name, String codeName) {
         this.name = name;
