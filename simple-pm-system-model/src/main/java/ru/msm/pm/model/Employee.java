@@ -5,22 +5,34 @@ import lombok.experimental.SuperBuilder;
 import ru.msm.pm.enums.EmployeeStatus;
 import ru.msm.pm.model.abstract_entities.Member;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
+@Entity
+@Table(name = "employee")
 public class Employee extends Member implements Serializable {
 
     //обязательные:
+    @Column(name = "status")
+    @Enumerated(value = EnumType.STRING)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
     //необязательные:
+    @Column(name = "patronymic")
     private String patronymic;
+
+    @Column(name = "position")
     private String position;
+
+    @Column(name = "account", unique = true)
     private String account;
+
+    @Column(name = "email")
     private String email;
 
     public Employee(String name, String surname) {
