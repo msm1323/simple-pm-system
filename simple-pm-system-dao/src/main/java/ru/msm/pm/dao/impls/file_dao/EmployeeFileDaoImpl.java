@@ -11,7 +11,7 @@ public class EmployeeFileDaoImpl implements MemberDao<Employee, Long> {
 
     private static EmployeeFileDaoImpl employeeFileDao;
     private final AtomicLong idGenerator;
-    private final String commonDaoDataPath = "simple-pm-system-dao/src/main/java/ru/msm/pm/dao/data/";
+    private final String commonDaoDataPath = "simple-pm-system-dao/src/main/java/ru/msm/pm/dao/file_db/";
     private final String employeeDataFilePath = commonDaoDataPath + "employee";
     private final String idPropsFilePath = commonDaoDataPath + "id.properties";
     private final String idPropName = "id.employee.cur.value";
