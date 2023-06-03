@@ -5,23 +5,40 @@ import lombok.experimental.SuperBuilder;
 import ru.msm.pm.enums.TaskStatus;
 import ru.msm.pm.model.abstract_entities.BaseTask;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
+@Entity
+@Table(name = "task")
 public class Task extends BaseTask implements Serializable {
 
     //обязательные:
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "author")
     private Employee author;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private TaskStatus status = TaskStatus.NEW;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "project")
     private Project project;
+
+    @Column(name = "labor_costs", nullable = false)
     private Integer laborCosts;
+
+    @Column(name = "deadline", nullable = false)
     private Date deadline;
 
     //необязательные:
+    @ManyToOne
+    @JoinColumn(name = "executor")
     private Employee executor;
 
     @Override
@@ -35,8 +52,8 @@ public class Task extends BaseTask implements Serializable {
                 ", deadline=" + deadline +
                 ", dateCreated=" + super.getDateCreated() +
                 ", dateUpdated=" + super.getDateUpdated() +
-                ", description='" + super.getDescription() + '\'' +
-                ", executor.id=" + executor.getId() +
+                (super.getDescription() == null ? "" : (", description.id='" + super.getDescription() + '\'')) +
+                (executor == null ? "" : (", executor.id=" + executor.getId())) +
                 '}';
     }
 

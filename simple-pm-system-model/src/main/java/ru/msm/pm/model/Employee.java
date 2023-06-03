@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
@@ -18,7 +17,7 @@ import java.io.Serializable;
 public class Employee extends Member implements Serializable {
 
     //обязательные:
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
@@ -42,5 +41,16 @@ public class Employee extends Member implements Serializable {
     @Override
     public void setId(Long id) {
         super.setId(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" + super.toString() +
+                "status=" + status +
+                (patronymic == null ? "" : (", patronymic='" + patronymic + '\'')) +
+                (position == null ? "" : (", position='" + position + '\'')) +
+                (account == null ? "" : (", account='" + account + '\'')) +
+                (email == null ? "" : (", email='" + email + '\'')) +
+                "} ";
     }
 }

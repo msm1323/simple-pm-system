@@ -17,14 +17,14 @@ public abstract class Member implements Serializable {
 
     //обязательные:
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE )
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @Column(name = "id", nullable = false)
     private Long id;  //сур-й PK
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "surname")
+    @Column(name = "surname", nullable = false)
     private String surname;
 
     protected Member(String name, String surname) {

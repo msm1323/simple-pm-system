@@ -2,17 +2,34 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import ru.msm.pm.enums.ProjectRole;
+import ru.msm.pm.enums.ProjectRoleToLongConverter;
+
+import javax.persistence.*;
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
+@Entity
+@Table(name = "project_participant")
 public class Participant {
 
     //обязательные:
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private Employee employee;
+
+    @OneToOne(optional = false)
+    @JoinColumn(name = "employee")
+    private Employee employee;  //todo
+
+    @Column(name = "role")
+    @Convert(converter = ProjectRoleToLongConverter.class, attributeName = "role")
     private ProjectRole role;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "project")
     private Project project;
 
     public Participant(Employee employee, Project project, ProjectRole role) {
