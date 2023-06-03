@@ -1,0 +1,256 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: 1
+      author: msm1323
+      changes:
+        - createTable:
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: TEXT
+              - column:
+                  name: account
+                  type: TEXT
+                  constraints:
+                    unique: true
+              - column:
+                  name: position
+                  type: TEXT
+              - column:
+                  name: email
+                  type: TEXT
+  - changeSet:
+      id: 2
+      author: msm1323
+      changes:
+        - createTable:
+            tableName: project
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: code_name
+                  type: TEXT
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+  - changeSet:
+      id: 3
+      author: msm1323
+      changes:
+        - createTable:
+            tableName: task
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_updated
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: author
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: executor
+                  type: BIGINT
+                  constraints:
+              - column:
+                  name: labor_costs
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: project
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: deadline
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+#        - addCheckConstraint:
+#            constraintBody: labor_costs > 0
+#            constraintName: positive_laborCosts
+#            tableName: task
+        - addForeignKeyConstraint:
+            baseColumnNames: author
+            baseTableName: task
+            constraintName: author_id
+            referencedColumnNames: id
+            referencedTableName: employee
+        - addForeignKeyConstraint:
+            baseColumnNames: executor
+            baseTableName: task
+            constraintName: executor_id
+            referencedColumnNames: id
+            referencedTableName: employee
+        - addForeignKeyConstraint:
+            baseColumnNames: project
+            baseTableName: task
+            constraintName: project_id
+            referencedColumnNames: id
+            referencedTableName: project
+  - changeSet:
+      id: 4
+      author: msm1323
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: role
+                  type: TEXT
+                  constraints:
+                    nullable: false
+                    unique: true
+  - changeSet:
+      id: 5
+      author: msm1323
+      changes:
+        - createTable:
+            tableName: project_participant
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: employee
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: project
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: employee
+            baseTableName: project_participant
+            constraintName: employee_id
+            referencedColumnNames: id
+            referencedTableName: employee
+        - addForeignKeyConstraint:
+            baseColumnNames: project
+            baseTableName: project_participant
+            constraintName: project_id
+            referencedColumnNames: id
+            referencedTableName: project
+        - addForeignKeyConstraint:
+            baseColumnNames: role
+            baseTableName: project_participant
+            constraintName: role_id
+            referencedColumnNames: id
+            referencedTableName: role
+  - changeSet:
+      id: 6
+      author: msm1323
+      changes:
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role
+                  value: "MANAGER"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role
+                  value: "ANALYST"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role
+                  value: "DEVELOPER"
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: role
+                  value: "TESTER"
