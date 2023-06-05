@@ -21,6 +21,10 @@
             <artifactId>simple-pm-system-common</artifactId>
             <version>${revision}${changelist}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,13 +1,12 @@
 package ru.msm.pm.dto.employee;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
 @AllArgsConstructor
-public class DeleteEmployeeDto {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class DeleteEmployeeDto {    //todo убрать?
 
     private Long id;        //обязательное для выполнения запроса поле
 
