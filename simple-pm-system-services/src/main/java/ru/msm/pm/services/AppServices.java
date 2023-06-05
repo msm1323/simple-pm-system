@@ -6,20 +6,19 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
 
-import ru.msm.pm.dto.employee.*;
-import ru.msm.pm.services.config.AppConfig;
+import ru.msm.pm.services.config.ServicesConfig;
 
 import java.sql.SQLException;
 
 @SpringBootApplication
-@Import(AppConfig.class)
-public class Application implements CommandLineRunner {
+@Import(ServicesConfig.class)
+public class AppServices implements CommandLineRunner {
 
-    @Autowired
-    EmployeeService employeeService;
+//    @Autowired
+//    EmployeeService employeeService;
 
     public static void main(String[] args) throws SQLException {
-        SpringApplication.run(Application.class);
+        SpringApplication.run(AppServices.class);
 
     }
 
@@ -29,8 +28,7 @@ public class Application implements CommandLineRunner {
 //                .name("serv_name").surname("serv_surname").build();
 //        System.out.println(employeeService.create(dto));
 
-//        GetEmployeeByIdDto dto = GetEmployeeByIdDto.builder()
-//                        .id(43L).build();
+//        GetEmployeeByIdDto dto = new GetEmployeeByIdDto(1L);
 //        System.out.println(employeeService.getEmployeeById(dto));
 
 //        GetEmployeeByAccountDto dto = GetEmployeeByAccountDto.builder().account("for4four").build();

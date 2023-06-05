@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @Configuration
-@EntityScan(basePackages = "ru.msm.pm.model")
-@EnableJpaRepositories(basePackages = "ru.msm.pm.dao")
-public class AppConfig {
+//@EntityScan(basePackages = "ru.msm.pm.model")
+//@EnableJpaRepositories(basePackages = "ru.msm.pm.dao")
+public class ServicesConfig {
 
 }
