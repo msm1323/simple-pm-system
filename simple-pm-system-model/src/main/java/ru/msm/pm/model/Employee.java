@@ -21,6 +21,9 @@ public class Employee extends Member implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
+    @Column(name = "password") // todo
+    private String password;
+
     //необязательные:
     @Column(name = "patronymic")
     private String patronymic;

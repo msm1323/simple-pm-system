@@ -10,7 +10,6 @@ import java.io.Serializable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 @MappedSuperclass
-@Inheritance
 public abstract class BaseProject implements Serializable {
 
     //обязательные:

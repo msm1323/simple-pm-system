@@ -13,7 +13,6 @@ import java.util.Date;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SuperBuilder
 @MappedSuperclass
-@Inheritance
 public abstract class BaseTask implements Serializable {
 
     //обязательные:
