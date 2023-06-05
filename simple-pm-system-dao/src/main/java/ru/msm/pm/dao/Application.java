@@ -1,27 +1,23 @@
 package ru.msm.pm.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import ru.msm.pm.dao.config.AppConfig;
-import ru.msm.pm.dao.impls.jdbc_dao.EmployeeFilter;
-import ru.msm.pm.enums.EmployeeStatus;
 import ru.msm.pm.model.Employee;
-import ru.msm.pm.model.Task;
+import ru.msm.pm.dao.config.DaoConfig;
 
 import java.sql.SQLException;
-import java.util.Arrays;
 
+@RequiredArgsConstructor
 @SpringBootApplication
-@Import(AppConfig.class)
+@Import(DaoConfig.class)
 public class Application implements CommandLineRunner {
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-    @Autowired
-    private TaskRepository taskRepository;
+    private final EmployeeRepository employeeRepository;
+
+    private final TaskRepository taskRepository;
 
     public static void main(String[] args) throws SQLException {
         SpringApplication.run(Application.class);
@@ -41,13 +37,14 @@ public class Application implements CommandLineRunner {
 //        Employee employee = new Employee("name__45", "surname_45");
 //        System.out.println(employeeRepository.createEmployee(employee));
 
-//        Employee e = new Employee("NAME upd", "SURNAME upd");
-//        e.setId(22L);
-//        System.out.println(employeeRepository.updateEmployee(e));
+        Employee e = new Employee("NAME upd", "SURNAME upd");
+        e.setId(3L);
+        e.setPassword("fdgsfdg");
+        System.out.println(employeeRepository.updateEmployee(e));
 //        System.out.println(employeeRepository.deleteEmployee(e));
-//        System.out.println(employeeRepository.getEmployeeById(21L));
+//        System.out.println(employeeRepository.getEmployeeById(1L));
 
-        System.out.println(taskRepository.getTaskById(1L));
+//        System.out.println(taskRepository.getTaskById(1L));
 
     }
 }
