@@ -20,6 +20,7 @@ public class EmployeeMapper {
                 .patronymic(dto.getPatronymic())
                 .position(dto.getPosition())
                 .account(dto.getAccount())
+                .password(dto.getPassword())
                 .email(dto.getEmail())
                 .build();
     }
@@ -37,6 +38,7 @@ public class EmployeeMapper {
                 .displayName(displayName)
                 .status(employee.getStatus())
                 .details(details)
+                .password(employee.getPassword())
                 .build();
     }
 
