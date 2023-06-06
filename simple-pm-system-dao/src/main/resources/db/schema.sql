@@ -37,12 +37,6 @@ CREATE TABLE task
     description text
 );
 
-CREATE TABLE role
-(
-    id   bigserial PRIMARY KEY,
-    role text NOT NULL UNIQUE
-);
-
 CREATE TABLE project_participant
 (
     id       bigserial PRIMARY KEY,
@@ -50,6 +44,5 @@ CREATE TABLE project_participant
     CONSTRAINT employee_id foreign key (employee) references employee (id),
     project  bigint NOT NULL,
     CONSTRAINT project_id foreign key (project) references project (id),
-    role     bigint NOT NULL,
-    CONSTRAINT role_id foreign key (role) references role (id)
+    role     text NOT NULL
 );

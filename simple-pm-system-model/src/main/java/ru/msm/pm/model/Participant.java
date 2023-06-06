@@ -2,7 +2,6 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import ru.msm.pm.enums.ProjectRole;
-import ru.msm.pm.enums.ProjectRoleToLongConverter;
 
 import javax.persistence.*;
 
@@ -25,7 +24,7 @@ public class Participant {
     private Employee employee;  //todo
 
     @Column(name = "role")
-    @Convert(converter = ProjectRoleToLongConverter.class, attributeName = "role")
+    @Enumerated(EnumType.STRING)
     private ProjectRole role;
 
     @ManyToOne(optional = false)
