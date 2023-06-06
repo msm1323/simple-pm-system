@@ -2,7 +2,7 @@ package ru.msm.pm.dto.employee;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import ru.msm.pm.enums.EmployeeStatus;
+import ru.msm.pm.common.enums.EmployeeStatus;
 
 @Data
 @Builder

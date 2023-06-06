@@ -1,7 +1,7 @@
 package ru.msm.pm.dto.project;
 
 import lombok.Data;
-import ru.msm.pm.enums.ProjectStatus;
+import ru.msm.pm.common.enums.ProjectStatus;
 
 @Data
 public class FindProjectsDto {

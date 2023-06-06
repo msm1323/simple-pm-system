@@ -1,8 +1,8 @@
 package ru.msm.pm.dao.impls.jdbc_dao;
 
 import lombok.Data;
-import ru.msm.pm.enums.EmployeeStatus;
-import ru.msm.pm.enums.ProjectRole;
+import ru.msm.pm.common.enums.EmployeeStatus;
+import ru.msm.pm.common.enums.ProjectRole;
 
 @Data
 public class EmployeeFilter {

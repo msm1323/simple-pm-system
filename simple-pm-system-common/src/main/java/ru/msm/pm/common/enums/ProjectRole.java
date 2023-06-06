@@ -1,4 +1,4 @@
-package ru.msm.pm.enums;
+package ru.msm.pm.common.enums;
 
 public enum ProjectRole {
     MANAGER,

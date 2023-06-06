@@ -2,7 +2,7 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import ru.msm.pm.enums.EmployeeStatus;
+import ru.msm.pm.common.enums.EmployeeStatus;
 import ru.msm.pm.model.abstract_entities.Member;
 
 import javax.persistence.*;

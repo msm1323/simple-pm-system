@@ -4,7 +4,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import ru.msm.pm.dao.impls.jdbc_dao.EmployeeFilter;
-import ru.msm.pm.enums.EmployeeStatus;
+import ru.msm.pm.common.enums.EmployeeStatus;
 import ru.msm.pm.model.Employee;
 
 import javax.persistence.criteria.Predicate;

@@ -2,7 +2,7 @@ package ru.msm.pm.dto.task;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.msm.pm.enums.TaskStatus;
+import ru.msm.pm.common.enums.TaskStatus;
 
 @Data
 @Builder

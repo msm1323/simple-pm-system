@@ -3,7 +3,7 @@ package ru.msm.pm.model;
 import lombok.*;
 
 import lombok.experimental.SuperBuilder;
-import ru.msm.pm.enums.ProjectStatus;
+import ru.msm.pm.common.enums.ProjectStatus;
 import ru.msm.pm.model.abstract_entities.BaseProject;
 
 import javax.persistence.*;

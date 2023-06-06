@@ -2,7 +2,7 @@ package ru.msm.pm.dto.projectTeam;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.msm.pm.enums.ProjectRole;
+import ru.msm.pm.common.enums.ProjectRole;
 
 @Data
 @Builder

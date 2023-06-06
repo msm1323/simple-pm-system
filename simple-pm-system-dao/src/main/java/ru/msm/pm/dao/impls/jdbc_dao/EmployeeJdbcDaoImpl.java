@@ -1,7 +1,7 @@
 package ru.msm.pm.dao.impls.jdbc_dao;
 
 import ru.msm.pm.dao.MemberDao;
-import ru.msm.pm.enums.EmployeeStatus;
+import ru.msm.pm.common.enums.EmployeeStatus;
 import ru.msm.pm.model.Employee;
 
 import javax.sql.DataSource;

@@ -2,7 +2,7 @@ package ru.msm.pm.model;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import ru.msm.pm.enums.TaskStatus;
+import ru.msm.pm.common.enums.TaskStatus;
 import ru.msm.pm.model.abstract_entities.BaseTask;
 
 import javax.persistence.*;

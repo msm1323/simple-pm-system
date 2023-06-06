@@ -1,7 +1,7 @@
 package ru.msm.pm.model;
 
 import lombok.*;
-import ru.msm.pm.enums.ProjectRole;
+import ru.msm.pm.common.enums.ProjectRole;
 
 import javax.persistence.*;
 
