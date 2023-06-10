@@ -8,6 +8,11 @@ public interface EmployeeService {
 
     EmployeeDto create(CreateEmployeeDto dto);
 
+    EmployeeDto createFull(CreateFullEmployeeDto dto);
+
+    //задать пароль/логин удаленному сотруднику нельзя
+    EmployeeDto setCredentials(SetEmployeeCredentials dto);
+
     EmployeeDto delete(DeleteEmployeeDto dto);
 
     EmployeeDto edit(EditEmployeeDto dto);
@@ -20,4 +25,5 @@ public interface EmployeeService {
 
     List<EmployeeDto> getEmployeesByIds(GetEmployeesByIdsDto dto);
 
+    List<EmployeeDto> getAllEmployees();
 }

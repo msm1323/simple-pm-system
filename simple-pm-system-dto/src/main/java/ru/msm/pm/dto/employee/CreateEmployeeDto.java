@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Schema(title = "Создание", description = "Создание карточки сотрудника")
+@Schema(title = "Создание [упрощенное]", description = "Упрощенное создание карточки сотрудника - только с обязательными полями.")
 public class CreateEmployeeDto {
     //обязательные для выполнения запроса поля:
     @Schema(title = "Имя")

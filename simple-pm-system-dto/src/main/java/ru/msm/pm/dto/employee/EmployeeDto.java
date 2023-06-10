@@ -21,9 +21,12 @@ public class EmployeeDto {
     private EmployeeStatus status;
 
     @Schema(title = "Дополнительная информация о сотруднике")
-    private String details; //необязательные поля (кроме patronymic)
+    private String details; //необязательные поля (кроме patronymic и account)
 
-    @Schema(title = "Пароль")//ограничить вывод
+    @Schema(title = "Учетная запись")
+    private String account;
+
+    @Schema(title = "Пароль")
     private String password;
 
 }

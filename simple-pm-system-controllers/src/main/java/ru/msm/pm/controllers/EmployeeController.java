@@ -5,12 +5,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.msm.pm.dto.employee.*;
 import ru.msm.pm.services.EmployeeService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 // http://localhost:8080/swagger-ui/index.html
 @RequiredArgsConstructor
 @RestController
@@ -19,31 +21,72 @@ import java.util.List;
 public class EmployeeController {
     private final EmployeeService employeeService;
 
-//todo статусы
     @Operation(summary = "Создание карточки сотрудника")
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EmployeeDto> create(@RequestBody CreateEmployeeDto dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(employeeService.create(dto));
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDto create(@RequestBody CreateEmployeeDto dto) {
+        return employeeService.create(dto);
+    }
+
+    @Operation(summary = "Создание полной карточки сотрудника")
+    @PostMapping(value = "/create-full", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public EmployeeDto createFull(@RequestBody CreateFullEmployeeDto dto) {
+        try {
+            return employeeService.createFull(dto);
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @Operation(summary = "Создание карточки сотрудника")
+    @PostMapping(value = "/set-credentials", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EmployeeDto setCredentials(@RequestBody SetEmployeeCredentials dto) {
+        try {
+            return employeeService.setCredentials(dto);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Редактирование карточки сотрудника")
     @PutMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeDto update(@RequestBody EditEmployeeDto dto) {
-        return employeeService.edit(dto);
+    public EmployeeDto edit(@RequestBody EditEmployeeDto dto) {
+        try {
+            return employeeService.edit(dto);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Получение карточки сотрудника по личному идентификатору")
-    @GetMapping("/{id}")    //todo ?
+    @GetMapping("/{id}")
     public EmployeeDto getById(@PathVariable Long id) {
         GetEmployeeByIdDto dto = new GetEmployeeByIdDto(id);
-        return employeeService.getEmployeeById(dto);
+        try {
+            return employeeService.getEmployeeById(dto);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Получение карточки сотрудника по учетной записи")
     @GetMapping("/account")
     public EmployeeDto getByAccount(@RequestParam String account) {
         GetEmployeeByAccountDto dto = new GetEmployeeByAccountDto(account);
-        return employeeService.getEmployeeByAccount(dto);
+        try {
+            return employeeService.getEmployeeByAccount(dto);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Удаление карточки сотрудника",
@@ -51,25 +94,44 @@ public class EmployeeController {
     @DeleteMapping("/delete")
     public EmployeeDto deleteById(@RequestParam Long id) {
         DeleteEmployeeDto dto = new DeleteEmployeeDto(id);
-        return employeeService.delete(dto);
+        try {
+            return employeeService.delete(dto);
+        } catch (NoSuchElementException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Поиск карточек сотрудников по текстовому значению",
-            description = "  Поиск осуществляется по текстовому значению, которое проверяется по атрибутам" +
-                "Фамилия, Имя, Отчество, учетной записи, адресу электронной почты и только среди активных сотрудников.")
+            description = "Поиск осуществляется по текстовому значению, которое проверяется по атрибутам" +
+                    "Фамилия, Имя, Отчество, учетной записи, адресу электронной почты и только среди активных сотрудников.")
     @GetMapping(value = "/find", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<EmployeeDto> findByValue(@RequestBody FindEmployeesDto dto) {
-        return employeeService.findByValue(dto);
+        try {
+            return employeeService.findByValue(dto);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
     @Operation(summary = "Получение карточек сотрудников по списку личных идентификаторов")
     @GetMapping(value = "/list", consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<EmployeeDto> getByIds(@RequestBody GetEmployeesByIdsDto dto) {
-        return employeeService.getEmployeesByIds(dto);
+        try {
+            return employeeService.getEmployeesByIds(dto);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
-//    @GetMapping("/")
-//    public List<EmployeeDto> getAll() {
-//        return null;
-//    }
+    @Operation(summary = "Получение карточек всех сотрудников")
+    @GetMapping("/")
+    public List<EmployeeDto> getAll() {
+        try {
+            return employeeService.getAllEmployees();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }

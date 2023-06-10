@@ -3,17 +3,16 @@ package ru.msm.pm.dto.employee;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Schema(title = "Редактирование", description = "Редактирование карточки сотрудника")
-public class EditEmployeeDto {
+@Schema(title = "Создание [полное]",
+        description = "Создание карточки сотрудника с возможностью задать значения для всех полей сразу.")
+public class CreateFullEmployeeDto {
 
-    //обязательные поля Employee:
-    @Schema(title = "Идентификатор")
-    private Long id;        //обязательное для выполнения запроса поле
-
+    //обязательные:
     @Schema(title = "Имя")
     private String name;
 
