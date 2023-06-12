@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
 @SpringBootTest(classes = ServicesConfig.class)
 @PropertySource(value = "application-test.properties")
 @EnableAutoConfiguration
-public class EmployeeServiceImplTest{
+public class EmployeeServiceImplTest extends BaseTest {
 
     @Spy
     EmployeeRepository repository;
