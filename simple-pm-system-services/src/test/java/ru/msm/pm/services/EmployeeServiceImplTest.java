@@ -1,25 +1,17 @@
-import lombok.RequiredArgsConstructor;
+package ru.msm.pm.services;
+
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.codec.CharSequenceEncoder;
-import org.springframework.test.context.ContextConfiguration;
 import ru.msm.pm.dao.EmployeeRepository;
 import ru.msm.pm.dto.employee.EmployeeDto;
-import ru.msm.pm.dto.employee.FindEmployeesDto;
 import ru.msm.pm.dto.employee.GetEmployeeByAccountDto;
 import ru.msm.pm.dto.employee.GetEmployeeByIdDto;
-import ru.msm.pm.mappers.EmployeeMapper;
 import ru.msm.pm.model.Employee;
-import ru.msm.pm.services.EmployeeService;
 import ru.msm.pm.services.config.ServicesConfig;
 import ru.msm.pm.services.impls.EmployeeServiceImpl;
 
