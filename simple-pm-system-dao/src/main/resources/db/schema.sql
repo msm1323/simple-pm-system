@@ -6,6 +6,7 @@ CREATE TABLE employee
     status     text NOT NULL,
     patronymic text,
     account    text UNIQUE,
+    password   text,
     position   text,
     email      text
 );
