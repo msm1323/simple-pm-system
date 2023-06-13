@@ -27,14 +27,22 @@
 
         <lombok.version>1.18.24</lombok.version>
         <postgresql.version>42.6.0</postgresql.version>
+        <jaxb-api.version>2.3.1</jaxb-api.version>
+        <liquibase.version>4.18.0</liquibase.version>
+
+        <!--        Spring:        -->
         <spring-core.version>5.3.23</spring-core.version>
         <spring-context.version>5.3.23</spring-context.version>
         <spring-boot-starter.version>2.7.3</spring-boot-starter.version>
-        <jaxb-api.version>2.3.1</jaxb-api.version>
-        <liquibase.version>4.18.0</liquibase.version>
         <springdoc-openapi-ui.version>1.6.14</springdoc-openapi-ui.version>
+
+        <!--        Tests:        -->
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
         <testcontainers.version>1.17.6</testcontainers.version>
+
+        <!--        Plugins:        -->
+        <surefire-plugin.version>3.0.0-M6</surefire-plugin.version>
+        <spring-boot-maven-plugin.version>3.1.0</spring-boot-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -72,7 +80,6 @@
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
                 <version>${spring-boot-starter.version}</version>
             </dependency>
-            <!--            todo версии -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
@@ -142,5 +149,43 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-report-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>
