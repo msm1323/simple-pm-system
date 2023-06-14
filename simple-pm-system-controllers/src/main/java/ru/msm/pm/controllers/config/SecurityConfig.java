@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@EnableWebSecurity              //todo иначе не находил бин HttpSecurity
+@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
