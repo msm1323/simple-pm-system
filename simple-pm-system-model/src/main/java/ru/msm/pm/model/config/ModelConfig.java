@@ -1,4 +1,4 @@
-package ru.msm.pm.model;
+package ru.msm.pm.model.config;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Configuration;
