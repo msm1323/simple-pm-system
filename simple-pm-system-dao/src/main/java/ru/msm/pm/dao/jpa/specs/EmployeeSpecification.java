@@ -1,4 +1,4 @@
-package ru.msm.pm.dao;
+package ru.msm.pm.dao.jpa.specs;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.CollectionUtils;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EmployeeSpecification {
 
-    // todo draft; Specification для фильтра с полями из разных классов??
+    // todo draft; Specification для фильтра с полями из разных классов?
     public static Specification<Employee> getSpec(EmployeeFilter filter) {
         return ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -32,10 +32,10 @@ public class EmployeeSpecification {
      и только среди активных сотрудников. */
     public static Specification<Employee> activeAndTextEqualValue(String value) {   //todo динамический
         return ((root, query, criteriaBuilder) -> {
-            List<Predicate> textPredicates = new ArrayList<>();
             if (value.isEmpty()) {
                 return query.where().getRestriction();
             }
+            List<Predicate> textPredicates = new ArrayList<>();
             textPredicates.add(criteriaBuilder.equal(root.get("surname"), value));
             textPredicates.add(criteriaBuilder.equal(root.get("name"), value));
             textPredicates.add(criteriaBuilder.equal(root.get("patronymic"), value));
