@@ -8,7 +8,7 @@ import ru.msm.pm.dao.config.DaoConfig;
 
 
 @Configuration
-@ComponentScan(basePackages = "ru.msm.pm.services")
+@ComponentScan(basePackages = {"ru.msm.pm.services", "ru.msm.pm.mappers"})
 @Import({CommonConfig.class, DaoConfig.class})
 public class ServicesConfig {
 
