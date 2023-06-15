@@ -1,10 +1,11 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ParticipantDto {
 
     private Long participantId;

@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GetProjectTeamDto {
+public class DeleteParticipantByIdDto {
 
-    private Long projectId;        //обязательное для выполнения запроса поле
+    private Long participantId;        //обязательное для выполнения запроса поле
 
 }

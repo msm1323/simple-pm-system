@@ -1,4 +1,4 @@
-package ru.msm.pm.dto.projectTeam;
+package ru.msm.pm.dto.task;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GetProjectTeamDto {
+public class GetTasksByProjectIdDto {
 
-    private Long projectId;        //обязательное для выполнения запроса поле
+    Long projectId;
 
 }

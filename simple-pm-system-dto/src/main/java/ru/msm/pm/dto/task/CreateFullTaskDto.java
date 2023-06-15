@@ -8,12 +8,13 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CreateTaskDto {
+public class CreateFullTaskDto {
     //обязательные для выполнения запроса поля:
     private String name;
     private Long projectId;
     private Integer laborCosts;
     private Date deadline;
-
+    private String description;
+    private Long executorId;    //обяз
 
 }

@@ -1,12 +1,13 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectTeamDto {
 
     private Long projectId;

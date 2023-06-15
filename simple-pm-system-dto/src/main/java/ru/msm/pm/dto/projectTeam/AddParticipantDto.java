@@ -1,11 +1,12 @@
 package ru.msm.pm.dto.projectTeam;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import ru.msm.pm.common.enums.ProjectRole;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AddParticipantDto {
     //обязательные для выполнения запроса поля:
     private Long employeeId;
