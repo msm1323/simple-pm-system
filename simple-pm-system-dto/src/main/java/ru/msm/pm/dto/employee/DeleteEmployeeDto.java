@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DeleteEmployeeDto {    //todo убрать?
+public class DeleteEmployeeDto {
 
     private Long id;        //обязательное для выполнения запроса поле
 

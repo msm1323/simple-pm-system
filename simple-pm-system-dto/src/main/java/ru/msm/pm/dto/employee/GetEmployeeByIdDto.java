@@ -6,7 +6,7 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class GetEmployeeByIdDto {   //todo убрать? не и используется
+public class GetEmployeeByIdDto {
 
     @Schema(title = "Идентификатор")
     private Long id;        //обязательное для выполнения запроса поле

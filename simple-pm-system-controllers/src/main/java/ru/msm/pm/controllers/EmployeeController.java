@@ -3,6 +3,8 @@ package ru.msm.pm.controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +19,13 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/employee", produces = MediaType.APPLICATION_JSON_VALUE)
-@Tag(name = "EmployeeController", description = "Операции над сотрудником")
+@Tag(name = "EmployeeController", description = "Операции над сотрудниками")
 public class EmployeeController {
+
+    public static final Logger LOGGER = LogManager.getLogger(EmployeeController.class);//todo logs везде
     private final EmployeeService employeeService;
 
-    @Operation(summary = "Создание карточки сотрудника")
+    @Operation(summary = "Создание карточки сотрудника (упрощенное)")
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public EmployeeDto create(@RequestBody CreateEmployeeDto dto) {
@@ -34,7 +38,7 @@ public class EmployeeController {
     public EmployeeDto createFull(@RequestBody CreateFullEmployeeDto dto) {
         try {
             return employeeService.createFull(dto);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {//todo чтоб сообщения об ошибках выборочно были видны
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
@@ -52,10 +56,10 @@ public class EmployeeController {
     }
 
     @Operation(summary = "Редактирование карточки сотрудника")
-    @PutMapping(value = "/edit", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public EmployeeDto edit(@RequestBody EditEmployeeDto dto) {
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public EmployeeDto updateEmployee(@RequestBody UpdateEmployeeDto dto) {
         try {
-            return employeeService.edit(dto);
+            return employeeService.editEmployee(dto);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {
@@ -67,12 +71,12 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public EmployeeDto getById(@PathVariable Long id) {
         GetEmployeeByIdDto dto = new GetEmployeeByIdDto(id);
+        LOGGER.info("id = " + id);
         try {
             return employeeService.getEmployeeById(dto);
         } catch (NoSuchElementException e) {
+            LOGGER.debug("NoSuchElementException");
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -95,7 +99,7 @@ public class EmployeeController {
     public EmployeeDto deleteById(@RequestParam Long id) {
         DeleteEmployeeDto dto = new DeleteEmployeeDto(id);
         try {
-            return employeeService.delete(dto);
+            return employeeService.deleteEmployee(dto);
         } catch (NoSuchElementException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         } catch (Exception e) {

@@ -13,9 +13,9 @@ public interface EmployeeService {
     //задать пароль/логин удаленному сотруднику нельзя
     EmployeeDto setCredentials(SetEmployeeCredentials dto);
 
-    EmployeeDto delete(DeleteEmployeeDto dto);
+    EmployeeDto deleteEmployee(DeleteEmployeeDto dto);
 
-    EmployeeDto edit(EditEmployeeDto dto);
+    EmployeeDto editEmployee(UpdateEmployeeDto dto);
 
     List<EmployeeDto> findByValue(FindEmployeesDto dto);
 

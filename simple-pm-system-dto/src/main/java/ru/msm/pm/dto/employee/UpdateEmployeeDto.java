@@ -8,7 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Schema(title = "Редактирование", description = "Редактирование карточки сотрудника")
-public class EditEmployeeDto {
+public class UpdateEmployeeDto {
 
     //обязательные поля Employee:
     @Schema(title = "Идентификатор")
