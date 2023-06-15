@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     @Bean
-    public OpenAPI openAPI(){   //todo
+    public OpenAPI openAPI(){   //todo swagger auth
         return new OpenAPI().info(new Info().description("Open API").title("Simple Project Management System"));
     }
 
