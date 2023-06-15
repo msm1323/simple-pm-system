@@ -24,18 +24,19 @@ public class Project extends BaseProject implements Serializable {
     private ProjectStatus status = ProjectStatus.DRAFT;
 
     //необязательные:
-    @OneToMany (mappedBy="project")
+    @OneToMany (mappedBy="project", cascade = CascadeType.REMOVE)
     private List<Task> tasks;
 
-    @OneToMany (mappedBy="project")
+    @OneToMany (mappedBy="project", cascade = CascadeType.REMOVE)
     private List<Participant> team;
 
     @Override
     public String toString() {
-        return "Project{" + "codeName='" + super.getCodeName() + '\'' +
+        return "Project{id=" + super.getId() +
+                ", codeName='" + super.getCodeName() + '\'' +
                 ", name='" + super.getName() + '\'' +
                 ", status=" + status +
-                (super.getDescription() == null ? "" : (", description.id='" + super.getDescription() + '\'')) +
+                (super.getDescription() == null ? "" : (", description.='" + super.getDescription() + '\'')) +
                 '}';
     }
 

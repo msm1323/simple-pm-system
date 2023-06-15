@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 @Data
@@ -36,6 +37,20 @@ public abstract class BaseTask implements Serializable {
 
     protected BaseTask(String name) {
         this.name = name;
+    }
+
+    public static class TaskDataCreatedComparator implements Comparator<BaseTask> {
+
+        @Override
+        public int compare(BaseTask o1, BaseTask o2) {
+            if (o1.getDateCreated().before(o2.getDateUpdated())) {
+                return 1;
+            }
+            if (o1.getDateCreated().after(o2.getDateUpdated())) {
+                return -1;
+            }
+            return 0;
+        }
     }
 
 

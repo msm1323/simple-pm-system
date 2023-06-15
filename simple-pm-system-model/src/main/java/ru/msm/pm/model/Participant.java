@@ -21,7 +21,7 @@ public class Participant {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "employee")
-    private Employee employee;  //todo
+    private Employee employee;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
@@ -30,6 +30,14 @@ public class Participant {
     @ManyToOne(optional = false)
     @JoinColumn(name = "project")
     private Project project;
+
+    @Override
+    public String toString(){
+        return "Participant{ id=" + id +
+                ", employee.id=" + employee.getId() +
+                ", role=" + role +
+                ", project.id=" + project.getId() + '}';
+    }
 
     public Participant(Employee employee, Project project, ProjectRole role) {
         this.employee = employee;

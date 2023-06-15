@@ -52,7 +52,7 @@ public class Task extends BaseTask implements Serializable {
                 ", deadline=" + deadline +
                 ", dateCreated=" + super.getDateCreated() +
                 ", dateUpdated=" + super.getDateUpdated() +
-                (super.getDescription() == null ? "" : (", description.id='" + super.getDescription() + '\'')) +
+                (super.getDescription() == null ? "" : (", description='" + super.getDescription() + '\'')) +
                 (executor == null ? "" : (", executor.id=" + executor.getId())) +
                 '}';
     }

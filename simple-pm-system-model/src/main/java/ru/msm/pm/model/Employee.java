@@ -21,9 +21,6 @@ public class Employee extends Member implements Serializable {
     @Enumerated(value = EnumType.STRING)
     private EmployeeStatus status = EmployeeStatus.ACTIVE;
 
-    @Column(name = "password") // todo
-    private String password;
-
     //необязательные:
     @Column(name = "patronymic")
     private String patronymic;
@@ -33,6 +30,9 @@ public class Employee extends Member implements Serializable {
 
     @Column(name = "account", unique = true)
     private String account;
+
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "email")
     private String email;
