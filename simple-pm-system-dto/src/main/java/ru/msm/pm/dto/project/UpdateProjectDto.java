@@ -1,11 +1,12 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @Builder
-public class EditProjectDto {
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class UpdateProjectDto {
 
     private Long id;            //обязательное для выполнения запроса поле
     private String codeName;    //Является обязательным и уникальным среди всех проектов.

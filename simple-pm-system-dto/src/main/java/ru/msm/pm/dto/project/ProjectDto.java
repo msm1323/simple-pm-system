@@ -1,11 +1,12 @@
 package ru.msm.pm.dto.project;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import ru.msm.pm.common.enums.ProjectStatus;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProjectDto {
 
     //обязательные:
