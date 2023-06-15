@@ -29,6 +29,7 @@
         <lombok.version>1.18.24</lombok.version>
         <postgresql.version>42.6.0</postgresql.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
+        <modelmapper.version>2.4.4</modelmapper.version>
         <liquibase.version>4.18.0</liquibase.version>
         <log4j.version>2.20.0</log4j.version>
 
@@ -63,6 +64,11 @@
                 <groupId>javax.xml.bind</groupId>
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.liquibase</groupId>
